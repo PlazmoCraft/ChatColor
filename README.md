@@ -53,7 +53,7 @@ Chat:
 ## Сборка
 
 **Требования:**
-- Java 21 (скачай [Temurin JDK 21](https://adoptium.net/temurin/releases/?version=21))
+- Java 21 установлена и доступна в PATH (проверь: `java -version`)
 - Интернет для скачивания зависимостей
 
 **Windows:**
@@ -68,9 +68,12 @@ gradlew.bat build
 
 Готовый jar появится в `build/libs/chatcolor-1.0.0.jar`.
 
-**Примечание:** Gradle wrapper автоматически скачает нужную версию Gradle при первом запуске. Если у тебя Java 21 не в PATH, укажи её в `gradle.properties`:
+**Если Java 21 не найдена автоматически:**
+
+Gradle автоматически найдёт Java через системную переменную `JAVA_HOME` или foojay toolchain. Если нужно указать вручную, добавь в `gradle.properties`:
+
 ```properties
-org.gradle.java.home=C:/путь/к/jdk21
+org.gradle.java.home=/путь/к/jdk-21
 ```
 
 ## Хранение данных
@@ -82,5 +85,5 @@ org.gradle.java.home=C:/путь/к/jdk21
 Проект использует:
 - **Gradle 8.11** с Kotlin DSL
 - **Paper 1.21.1** dev bundle (paperweight)
-- **Java 21** toolchain
+- **Java 21** toolchain (автоматическая загрузка через foojay-resolver)
 - **SQLite** для хранения
