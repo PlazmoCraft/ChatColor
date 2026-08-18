@@ -1,29 +1,29 @@
 # ChatColor
 
-Twitch-style colored nicknames for Paper chat. Every player gets a random color on their first join, the nickname is colored in chat, and the color is saved in a local SQLite database.
+Цветные ники в стиле Twitch для Paper. Каждый игрок при первом входе получает случайный цвет, ник красится в чате, а цвет сохраняется в локальной базе данных SQLite.
 
-## Features
+## Возможности
 
-- Automatic random color on first join (Twitch-style palette), persisted to SQLite
-- `<Name> message` chat format with the nickname colored and the message text plain
-- Colored name in the tab list via the player's display name
-- `/color` command to view, randomize or set a custom color
-- Full hex color support (`/color #FF5733`)
-- Join/quit messages are suppressed
-- Colors survive restarts and plugin reloads (SQLite + in-memory cache)
+- Автоматическая выдача случайного цвета при первом входе (палитра в стиле Twitch), сохранение в SQLite
+- Формат чата `<Ник> сообщение` — цветной ник, обычный белый текст
+- Цветной ник в таб-листе через display name игрока
+- Команда `/color` — посмотреть, сменить на случайный или задать свой цвет
+- Полная поддержка hex-цветов (`/color #FF5733`)
+- Сообщения о входе/выходе скрыты
+- Цвета переживают перезапуски и перезагрузки плагина (SQLite + кэш в памяти)
 
-## Requirements
+## Требования
 
-- Paper 1.21+ (or a compatible fork such as Leaf)
+- Paper 1.21+ (или совместимый форк, например Leaf)
 - Java 21
 
-## Installation
+## Установка
 
-1. Drop `ChatColor-1.0.0.jar` into the `plugins/` folder of your server.
-2. Restart the server (or load it at runtime with PlugManX).
-3. Done. Players get their color on their first join.
+1. Положи `ChatColor-1.0.0.jar` в папку `plugins/` на сервере.
+2. Перезапусти сервер (или загрузи на лету через PlugManX).
+3. Готово — игроки получат цвет при первом входе.
 
-If you use a plugin with its own chat system (e.g. CMI), disable it so it does not override the chat renderer:
+Если у тебя установлен плагин со своей системой чата (например CMI), отключи его, чтобы он не перезаписывал рендер чата:
 
 ```yaml
 # plugins/CMI/Settings/Chat.yml
@@ -33,30 +33,30 @@ Chat:
     ClickHoverMessages: false
 ```
 
-## Commands
+## Команды
 
-| Command | Description |
+| Команда | Описание |
 | --- | --- |
-| `/color` | Show your current color and usage |
-| `/color random` | Get a random palette color (always different from the current one) |
-| `/color <name>` | Set a palette color, e.g. `/color red` |
-| `/color #RRGGBB` | Set a custom hex color, e.g. `/color #FF5733` |
-| `/color list` | List the palette with hex values |
+| `/color` | Показать свой текущий цвет и подсказку |
+| `/color random` | Случайный цвет из палитры (всегда отличается от текущего) |
+| `/color <имя>` | Задать цвет из палитры, например `/color red` |
+| `/color #RRGGBB` | Задать свой hex-цвет, например `/color #FF5733` |
+| `/color list` | Список палитры с hex-значениями |
 
-## Permissions
+## Права
 
-| Permission | Default | Description |
+| Право | По умолчанию | Описание |
 | --- | --- | --- |
-| `chatcolor.color` | true | Allows changing your nickname color |
+| `chatcolor.color` | true | Разрешает менять цвет ника |
 
-## Building
+## Сборка
 
 ```
 build.bat
 ```
 
-The build runs in an ASCII-path copy (`C:\cfbuild`) because the project lives under a non-ASCII path on Windows, which breaks Gradle's worker daemon. Requires a JDK 21 at `C:\cfbuild\jdk` and Gradle 8.11 at `C:\cfbuild\gradle`. The resulting jar is copied back as `ChatColor-1.0.0.jar`.
+Сборка выполняется в копии с ASCII-путём (`C:\cfbuild`), потому что проект лежит в папке с не-ASCII символами, что ломает worker-демон Gradle. Нужен JDK 21 в `C:\cfbuild\jdk` и Gradle 8.11 в `C:\cfbuild\gradle`. Итоговый jar копируется обратно как `ChatColor-1.0.0.jar`.
 
-## Storage
+## Хранение данных
 
-Colors are stored in `plugins/ChatColor/chatcolor.db` (SQLite), table `nick_colors`. Reads are served from an in-memory cache.
+Цвета хранятся в `plugins/ChatColor/chatcolor.db` (SQLite), таблица `nick_colors`. Чтение идёт из кэша в памяти.
