@@ -3,7 +3,7 @@ version: '${version}'
 main: dev.chatcolor.ChatColorPlugin
 api-version: '1.21'
 prefix: ChatColor
-authors: [chatcolor]
+authors: [themaster1970sf]
 description: Twitch-style colored nicknames in chat with SQLite storage
 
 commands:

@@ -19,9 +19,10 @@
 
 ## Установка
 
-1. Положи `ChatColor-1.0.0.jar` в папку `plugins/` на сервере.
-2. Перезапусти сервер (или загрузи на лету через PlugManX).
-3. Готово — игроки получат цвет при первом входе.
+1. Скачай собранный `chatcolor-1.0.0.jar` из [Releases](https://github.com/PlazmoCraft/ChatColor/releases) или собери сам (см. ниже).
+2. Положи jar в папку `plugins/` на сервере.
+3. Перезапусти сервер (или загрузи на лету через PlugManX).
+4. Готово — игроки получат цвет при первом входе.
 
 Если у тебя установлен плагин со своей системой чата (например CMI), отключи его, чтобы он не перезаписывал рендер чата:
 
@@ -51,12 +52,35 @@ Chat:
 
 ## Сборка
 
-```
-build.bat
+**Требования:**
+- Java 21 (скачай [Temurin JDK 21](https://adoptium.net/temurin/releases/?version=21))
+- Интернет для скачивания зависимостей
+
+**Windows:**
+```bash
+gradlew.bat build
 ```
 
-Сборка выполняется в копии с ASCII-путём (`C:\cfbuild`), потому что проект лежит в папке с не-ASCII символами, что ломает worker-демон Gradle. Нужен JDK 21 в `C:\cfbuild\jdk` и Gradle 8.11 в `C:\cfbuild\gradle`. Итоговый jar копируется обратно как `ChatColor-1.0.0.jar`.
+**Linux/Mac:**
+```bash
+./gradlew build
+```
+
+Готовый jar появится в `build/libs/chatcolor-1.0.0.jar`.
+
+**Примечание:** Gradle wrapper автоматически скачает нужную версию Gradle при первом запуске. Если у тебя Java 21 не в PATH, укажи её в `gradle.properties`:
+```properties
+org.gradle.java.home=C:/путь/к/jdk21
+```
 
 ## Хранение данных
 
 Цвета хранятся в `plugins/ChatColor/chatcolor.db` (SQLite), таблица `nick_colors`. Чтение идёт из кэша в памяти.
+
+## Разработка
+
+Проект использует:
+- **Gradle 8.11** с Kotlin DSL
+- **Paper 1.21.1** dev bundle (paperweight)
+- **Java 21** toolchain
+- **SQLite** для хранения
